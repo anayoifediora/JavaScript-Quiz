@@ -1,6 +1,6 @@
 main {
     position:relative;
-    left:400px;
+    left:300px;
 }
 
 section {
@@ -28,10 +28,4 @@ button {
     background-color: aqua;
     border-radius: 5px;
 }
-.question-section {
-    display:none;
-}
 
-.show {
-    display:block;
-}
