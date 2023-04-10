@@ -6,7 +6,7 @@ main {
 section {
     display:block;
     position: relative;
-    left:100px;
+    left:50px;
 }
 h2, p, button, ol {
     font-family: 'Alkatra', cursive;
@@ -17,8 +17,8 @@ h2, p, button, ol {
     width:700px;
 }
 .questions p {
-    font-weight: bolder;
-    font-size: 40px;
+    font-weight:bold;
+    font-size: 30px;
 }
 li {
     margin:10px;
@@ -28,4 +28,7 @@ button {
     background-color: aqua;
     border-radius: 5px;
 }
-
+button:hover {
+    background-color: grey;
+    cursor:grab;
+}
