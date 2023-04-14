@@ -10,6 +10,12 @@ var answerButton1 = document.createElement('button');
 var answerButton2 = document.createElement('button');
 var answerButton3 = document.createElement('button');
 var answerButton4 = document.createElement('button');
+answerButton1.classList.add('answer-button');
+answerButton2.classList.add('answer-button');
+answerButton3.classList.add('answer-button');
+answerButton4.classList.add('answer-button');
+
+
 var liEl1 = document.createElement('li');
 var liEl2 = document.createElement('li');
 var liEl3 = document.createElement('li');
@@ -19,14 +25,6 @@ var answerCommentEl = document.createElement('p');
 divQuestionsEl.setAttribute('class', 'questions');
 divAnswerEl.setAttribute('class', 'answer-buttons');
 
-
-function renderQuestion1() {
-
-questionEl.textContent = "Commonly used data types do not include:";
-answerButton1.textContent = "Strings";
-answerButton2.textContent = "Boolean";
-answerButton3.textContent = "Alert";
-answerButton4.textContent = "Numbers";
 
 questionSection.appendChild(divQuestionsEl);
 divQuestionsEl.appendChild(questionEl);
@@ -41,61 +39,106 @@ liEl1.appendChild(answerButton1);
 liEl2.appendChild(answerButton2);
 liEl3.appendChild(answerButton3);
 liEl4.appendChild(answerButton4);
-};
 
-function renderQuestion2() {
 
-    questionEl.textContent = "The condition in an if/else statement is enclosed within __________";
-    answerButton1.textContent = "Quotes";
-    answerButton2.textContent = "Parentheses";
-    answerButton3.textContent = "Curly brackets";
-    answerButton4.textContent = "Square Brackets";
-    
-    
-};
+// create a startQuiz function that will go through the quizQuestions object through a loop to render each question
+let quizQuestions = [ {
+  
+  questionEl: "Commonly used data types do not include:",
+  answerButton1: "Strings",
+  answerButton2: "Boolean",
+  answerButton3: "Alert",
+  answerButton4: "Numbers",
+  correctAnswer: "Alert",
 
-function renderQuestion3() {
+},
+{
+
+    questionEl: "The condition in an if/else statement is enclosed within __________",
+    answerButton1: "Quotes",
+    answerButton2: "Parentheses",
+    answerButton3: "Curly brackets",
+    answerButton4: "Square Brackets",
+    correctAnswer: "Parentheses",
     
-        questionEl.textContent = "Arrays in JavaScript can be used to store";
-        answerButton1.textContent = "Numbers and Strings";
-        answerButton2.textContent = "Other arrays";
-        answerButton3.textContent = "Boolean";
-        answerButton4.textContent = "All of the above";
+},
+
+ {
+    
+        questionEl: "Arrays in JavaScript can be used to store",
+        answerButton1: "Numbers and Strings",
+        answerButton2: "Other arrays",
+        answerButton3: "Boolean",
+        answerButton4: "All of the above",
         
+},
+
+ {
+    
+    questionEl: "String values must be enclosed within ____________ when being assigned to variables",
+    answerButton1: "Commas",
+    answerButton2: "Curly brackets",
+    answerButton3: "Quotes",
+    answerButton4: "Parentheses",
+    
+},
+
+ {
+    
+    questionEl: "A very useful tool used during development and debugging for printing content to the debugger is:",
+    answerButton1: "Console.log",
+    answerButton2: "For loops",
+    answerButton3: "Terminal/bash",
+    answerButton4: "JavaScript",
+    
+},
+];
+
+  function renderQuestions () {
+    questionEl.textContent = quizQuestions[0].questionEl;
+    answerButton1.textContent = quizQuestions[0].answerButton1;
+    answerButton2.textContent = quizQuestions[0].answerButton2;
+    answerButton3.textContent = quizQuestions[0].answerButton3;
+    answerButton4.textContent = quizQuestions[0].answerButton4;
+    }
+
+
+function pickAnswer () {
+  renderNextQuestion ()
+
+   if (quizQuestions[0].answerButton3 === quizQuestions[0].correctAnswer) {
+      console.log('Hello');
+  } else {
+    console.log ('Hi');
+  } 
+  
+  } ;
+
+function renderNextQuestion () {
+  for (var i = 0; i < quizQuestions.length; i++) {
+    questionEl.textContent = quizQuestions[i].questionEl;
+    answerButton1.textContent = quizQuestions[i].answerButton1;
+    answerButton2.textContent = quizQuestions[i].answerButton2;
+    answerButton3.textContent = quizQuestions[i].answerButton3;
+    answerButton4.textContent = quizQuestions[i].answerButton4;
+  }
 };
 
-function renderQuestion4() {
-    
-    questionEl.textContent = "String values must be enclosed within ____________ when being assigned to variables";
-    answerButton1.textContent = "Commas";
-    answerButton2.textContent = "Curly brackets";
-    answerButton3.textContent = "Quotes";
-    answerButton4.textContent = "Parentheses";
-    
+var answerButtonsArray = document.querySelectorAll('.answer-button');
+
+for (var i = 0; i < answerButtonsArray.length; i++) {
+   answerButtonsArray[i].addEventListener('click', pickAnswer);
 };
-
-function renderQuestion5() {
-    
-    questionEl.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
-    answerButton1.textContent = "Console.log";
-    answerButton2.textContent = "For loops";
-    answerButton3.textContent = "Terminal/bash";
-    answerButton4.textContent = "JavaScript";
-    
-};
+startButton.addEventListener("click", renderQuestions);
 
 
+// var correctOption = answerButton3;
+// var wrongOptions = [answerButton1, answerButton2, answerButton4];
 
-
-startButton.addEventListener("click", renderQuestion1);
-
-var correctOption = answerButton3;
-var wrongOptions = [answerButton1, answerButton2, answerButton4];
-
-if (correctOption) {
+/* if (correctOption) {
 
     correctOption.addEventListener('click', function () {
-        answerCommentEl.textContent = alert("Correct!");
+        answerCommentEl.textContent = "Correct!";
         answerCommentEl.setAttribute('style', 'font-size: 30px; position: relative; left: 400px');
         body.appendChild(answerCommentEl);
         renderQuestion2();
@@ -105,7 +148,7 @@ if (wrongOptions) {
        
         for (var i = 0; i < wrongOptions.length; i++) {
         wrongOptions[i].addEventListener('click', function () {
-        answerCommentEl.textContent = alert("Wrong ❌");
+        answerCommentEl.textContent = "Wrong ❌";
         answerCommentEl.setAttribute('style', 'font-size: 30px; position: relative; left: 400px');
         body.appendChild(answerCommentEl);
         renderQuestion2();
@@ -113,7 +156,7 @@ if (wrongOptions) {
 
 }
 
-/* correctOption = answerButton2;
+ correctOption = answerButton2;
 wrongOptions = [answerButton1, answerButton3, answerButton4];
 
 if (correctOption) {
@@ -135,4 +178,7 @@ if (wrongOptions) {
         renderQuestion3();
     })};
 
-} */
+} 
+
+
+ */
