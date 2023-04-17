@@ -10,6 +10,8 @@ var answerButton1 = document.createElement('button');
 var answerButton2 = document.createElement('button');
 var answerButton3 = document.createElement('button');
 var answerButton4 = document.createElement('button');
+var scoreEl = document.querySelector('.score');
+
 answerButton1.classList.add('answer-button');
 answerButton2.classList.add('answer-button');
 answerButton3.classList.add('answer-button');
@@ -19,7 +21,7 @@ answerButton4.classList.add('answer-button');
 var liEl1 = document.createElement('li');
 var liEl2 = document.createElement('li');
 var liEl3 = document.createElement('li');
-var liEl4 = document.createElement('li');
+var liEl4 = document.createElement('li'); 
 var answerCommentEl = document.createElement('p');
 
 divQuestionsEl.setAttribute('class', 'questions');
@@ -33,13 +35,15 @@ divAnswerEl.appendChild(olEl);
 olEl.appendChild(liEl1);
 olEl.appendChild(liEl2);
 olEl.appendChild(liEl3);
-olEl.appendChild(liEl4);
+olEl.appendChild(liEl4); 
 
 liEl1.appendChild(answerButton1);
 liEl2.appendChild(answerButton2);
 liEl3.appendChild(answerButton3);
 liEl4.appendChild(answerButton4);
 
+var currentQuestions = 1;
+var score = 0;
 
 // create a startQuiz function that will go through the quizQuestions object through a loop to render each question
 let quizQuestions = [ {
@@ -70,6 +74,7 @@ let quizQuestions = [ {
         answerButton2: "Other arrays",
         answerButton3: "Boolean",
         answerButton4: "All of the above",
+        correctAnswer: "All of the above",
         
 },
 
@@ -80,6 +85,7 @@ let quizQuestions = [ {
     answerButton2: "Curly brackets",
     answerButton3: "Quotes",
     answerButton4: "Parentheses",
+    correctAnswer: "Quotes"
     
 },
 
@@ -90,6 +96,7 @@ let quizQuestions = [ {
     answerButton2: "For loops",
     answerButton3: "Terminal/bash",
     answerButton4: "JavaScript",
+    correctAnswer: "Console.log",
     
 },
 ];
@@ -104,25 +111,36 @@ let quizQuestions = [ {
 
 
 function pickAnswer () {
-  renderNextQuestion ()
+  renderNextQuestion ();
+    currentQuestions++;
+};
 
-   if (quizQuestions[0].answerButton3 === quizQuestions[0].correctAnswer) {
-      console.log('Hello');
-  } else {
-    console.log ('Hi');
-  } 
+/* function checkResult() {
+  if (quizQuestions[0].answerButton3 === quizQuestions[0].correctAnswer) {
+      console.log("hello");
+} else {
+      console.log("hi");
+}
+};     */
+
   
-  } ;
+
+   
+   ;
 
 function renderNextQuestion () {
-  for (var i = 0; i < quizQuestions.length; i++) {
-    questionEl.textContent = quizQuestions[i].questionEl;
-    answerButton1.textContent = quizQuestions[i].answerButton1;
-    answerButton2.textContent = quizQuestions[i].answerButton2;
-    answerButton3.textContent = quizQuestions[i].answerButton3;
-    answerButton4.textContent = quizQuestions[i].answerButton4;
-  }
+  
+    questionEl.textContent = quizQuestions[currentQuestions].questionEl;
+    answerButton1.textContent = quizQuestions[currentQuestions].answerButton1;
+    answerButton2.textContent = quizQuestions[currentQuestions].answerButton2;
+    answerButton3.textContent = quizQuestions[currentQuestions].answerButton3;
+    answerButton4.textContent = quizQuestions[currentQuestions].answerButton4;
+  
 };
+function setQuizScore () {
+scoreEl.textContent = score
+
+}
 
 var answerButtonsArray = document.querySelectorAll('.answer-button');
 
@@ -130,6 +148,10 @@ for (var i = 0; i < answerButtonsArray.length; i++) {
    answerButtonsArray[i].addEventListener('click', pickAnswer);
 };
 startButton.addEventListener("click", renderQuestions);
+
+
+ 
+  
 
 
 // var correctOption = answerButton3;
@@ -167,18 +189,7 @@ if (correctOption) {
         body.appendChild(answerCommentEl);
         renderQuestion3();
     });
-} 
-if (wrongOptions) {
-       
-        for (var i = 0; i < wrongOptions.length; i++) {
-        wrongOptions[i].addEventListener('click', function () {
-        answerCommentEl.textContent = "Wrong ❌";
-        answerCommentEl.setAttribute('style', 'font-size: 30px; position: relative; left: 400px');
-        body.appendChild(answerCommentEl);
-        renderQuestion3();
-    })};
 
-} 
 
 
  */
